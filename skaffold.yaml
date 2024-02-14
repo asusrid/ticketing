@@ -1,0 +1,25 @@
+apiVersion: skaffold/v2alpha3
+kind: Config
+# all the config files we want to load into our cluster
+deploy:
+  kubectl: 
+    manifests:
+      - ./infra/k8s/*
+build:
+  # when we build an image, don't push it outside the docker hub, as this is the default
+  local:
+    push: false
+  # things that are going to be built
+  artifacts:
+    - image: asusrid/auth
+      # the folder that cointains all the code for this image
+      context: auth
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        # I want skaffold to watch out these files
+        manual:
+          - src: 'src/**/**.ts'
+            # where to sync these files to inside the running container
+            dest: .
+

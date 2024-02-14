@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  # just one copy of the image
+  replicas: 1
+  # step1: tell the deployment how to find all the pods that is going to create
+  selector: 
+    matchLabels:
+      app: auth
+  # step 2: how to create each pod that this deployment is going to create
+  template:
+    metadata:
+      # the previous selector matches with this label
+      labels:
+        app: auth 
+    # how the pod will behave
+    spec:
+      containers:
+        # this name is for logging purposes
+        - name: auth
+        # name of the image we have just created with docker
+          image: asusrid/auth
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: auth-srv
+spec:
+  selector:
+    app: auth
+  ports:
+    - name: auth
+      protocol: TCP
+      port: 3000
+      targetPort: 3000
