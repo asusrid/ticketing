@@ -6,7 +6,7 @@ spec:
   # just one copy of the image
   replicas: 1
   # step1: tell the deployment how to find all the pods that is going to create
-  selector: 
+  selector:
     matchLabels:
       app: auth
   # step 2: how to create each pod that this deployment is going to create
@@ -14,23 +14,25 @@ spec:
     metadata:
       # the previous selector matches with this label
       labels:
-        app: auth 
+        app: auth
     # how the pod will behave
     spec:
       containers:
         # this name is for logging purposes
         - name: auth
-        # name of the image we have just created with docker
+          # name of the image we have just created with docker
           image: asusrid/auth
 ---
 apiVersion: v1
 kind: Service
-metadata: 
+metadata:
   name: auth-srv
 spec:
   selector:
+    # launch service with matching deployment name (previous one created)
     app: auth
   ports:
+    # this name is only for logs (in terminal e.g.)
     - name: auth
       protocol: TCP
       port: 3000
