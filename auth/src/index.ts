@@ -13,11 +13,11 @@ import { NotFoundError } from "./errors/not-found-error";
 
 const app = express();
 // use nginx proxy and trust connections from it
-app.set("trust-proxy", true);
+app.set("trust proxy", true);
 app.use(json());
 app.use(
   cookieSession({
-    // dont excrypt cookie
+    // dont encrypt cookie
     signed: false,
     // only accept https connections
     secure: true,

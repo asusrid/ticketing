@@ -22,6 +22,14 @@ spec:
         - name: auth
           # name of the image we have just created with docker
           image: asusrid/auth
+          # environment variables
+          env:
+            # this is the name displayed when launching the deployment
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 ---
 apiVersion: v1
 kind: Service
