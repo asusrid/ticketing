@@ -38,7 +38,8 @@ router.post(
         id: user.id,
         email: user.email,
       },
-      process.env.JWT_KEY
+      // a ! in ts means not to worry by undefined variables
+      process.env.JWT_KEY!
     );
 
     // store it on session object
