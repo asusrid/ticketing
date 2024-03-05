@@ -24,6 +24,7 @@ router.post(
     if (existingUser) {
       throw new BadRequestError("Email in use");
     }
+    console.log(email);
 
     const user = User.build({ email, password });
     await user.save();
