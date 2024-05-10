@@ -18,8 +18,8 @@ app.use(
   cookieSession({
     // dont encrypt cookie
     signed: false,
-    // only accept https connections
-    secure: true,
+    // only accept https connections for cookies
+    secure: process.env.NODE_ENV !== "test",
   })
 );
 
