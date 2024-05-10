@@ -13,3 +13,11 @@ it("response with details about current user", async () => {
 
   expect(response.body.currentUser.email).toEqual("test@test1.com");
 });
+
+it("response null when user does not exists", async () => {
+  const response = await request(app)
+    .get("/api/users/currentuser")
+    .send()
+    .expect(200);
+  expect(response.body.currentUser).toEqual(null);
+});
