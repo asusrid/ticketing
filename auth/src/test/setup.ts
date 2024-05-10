@@ -1,7 +1,9 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import { app } from "../app";
+import request from "supertest";
 
+// this will be used in all test files, and only affect test files
 declare global {
   var signin: () => Promise<string[]>;
 }
@@ -28,3 +30,19 @@ afterAll(async () => {
   }
   await mongoose.connection.close();
 });
+
+global.signin = async () => {
+  const email = "test@test";
+  const password = "password";
+
+  const response = await request(app)
+    .post("/api/users/signup")
+    .send({
+      email: email,
+      password: password,
+    })
+    .expect(201);
+
+  const cookie = response.get("Set-Cookie");
+  return cookie;
+};
