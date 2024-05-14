@@ -3,7 +3,7 @@ kind: Ingress
 metadata:
   name: ingress-srv
   annotations:
-    nginx.ingress.kubernetes.io/use-regex: 'true'
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   ingressClassName: nginx
   rules:
@@ -11,11 +11,19 @@ spec:
     - host: ticketing.dev
       http:
         paths:
+          # this will go in order, if path does not match the first option, then it'll to the next one
           - path: /api/users/?(.*)
             pathType: ImplementationSpecific
             backend:
               # when entered previous path, then go to auth-srv service
               service:
                 name: auth-srv
+                port:
+                  number: 3000
+          - path: /?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: client-srv
                 port:
                   number: 3000
