@@ -34,6 +34,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  # if you want to access this service, and therefore, the container,
+  # you need to call this domain: https://auth-srv/...
   name: auth-srv
 spec:
   selector:
