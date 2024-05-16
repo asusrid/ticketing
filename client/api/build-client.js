@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default ({ req }) => {
+const buildClient = ({ req }) => {
   if (typeof window === "undefined") {
     // we are on server
     // this is the way of modifying the preconfigured version of axios
@@ -16,3 +16,4 @@ export default ({ req }) => {
     });
   }
 };
+export default buildClient;
