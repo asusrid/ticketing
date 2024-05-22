@@ -1,6 +1,6 @@
 import { useState } from "react";
 import useRequest from "../../hooks/use-request";
-import { Router } from "next/router";
+import Router from "next/router";
 
 const signIn = () => {
   const [email, setEmail] = useState("");
@@ -9,8 +9,8 @@ const signIn = () => {
     url: "/api/users/signin",
     method: "post",
     body: {
-      email: email,
-      password: password,
+      email,
+      password,
     },
     onSuccess: () => Router.push("/"),
   });
