@@ -1,0 +1,8 @@
+import request from "supertest";
+import { app } from "../../app";
+
+it("It has a route handler listening to /api/tickets for post requests", async () => {});
+it("It can only be accessed if the user is signed in", async () => {});
+it("It returns an error if an invalid title is provided", async () => {});
+it("It returns an error if an invalid price is provided", async () => {});
+it("It creates a ticket with valid inputs", async () => {});
