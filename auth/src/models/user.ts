@@ -51,6 +51,7 @@ userSchema.pre("save", async function (done) {
   done();
 });
 
+// build func goal is to allow typescript to check the attrs arg before creating record
 userSchema.statics.build = (attrs: UserAttrs) => {
   return new User(attrs);
 };
